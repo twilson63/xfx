@@ -1,0 +1,16 @@
+{
+  "name": "xfx",
+  "version": "1.0.0",
+  "description": "A simple abstraction over virtual-dom",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test"
+  },
+  "keywords": [
+    "virtual-dom",
+    "component",
+    "architecture"
+  ],
+  "author": "Tom",
+  "license": "MIT"
+}

@@ -13,6 +13,7 @@ app.sendChange = require('value-event/change')
 app.sendClick = require('value-event/click')
 app.sendSubmit = require('value-event/submit')
 app.sendKey = require('value-event/key')
+app.xtend = require('xtend')
 
 var render = null
 

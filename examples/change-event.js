@@ -1,13 +1,12 @@
 var app = require('xfx')
 var h = require('xfx/h')
-var xtend = require('xtend')
 
 main.render = render
 app(main)
 
 function main (state, update) {
   state.title = 'Hello World'
-  state.actions = xtend({}, actions(update))
+  state.actions = app.xtend(state.actions, actions(update))
   return state
 }
 

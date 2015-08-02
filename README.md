@@ -1,5 +1,7 @@
 # xfx -> No Framework
 
+[![Build Status](https://travis-ci.org/twilson63/xfx.svg?branch=master)](https://travis-ci.org/twilson63/xfx)
+
 This is a simple abstraction over the virtual-dom to make it easy to build component architected applications:
 
 A component architecture uses composable components to build sophisticated applications, this module, only enables this ability, it pushes other opinions

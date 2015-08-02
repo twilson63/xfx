@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "xfx": "^1.0.2",
+    "xfx": "^1.0.3",
     "xtend": "^4.0.0"
   }
 }

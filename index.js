@@ -7,6 +7,8 @@ var Delegator = require('dom-delegator')
 var reduce = require('reduce')
 
 module.exports = app
+
+app.h = require('virtual-dom/h')
 app.send = require('value-event/event')
 app.sendValue = require('value-event/value')
 app.sendChange = require('value-event/change')

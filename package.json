@@ -4,7 +4,7 @@
   "description": "A simple abstraction over virtual-dom",
   "main": "index.js",
   "scripts": {
-    "test": "tape test"
+    "test": "tape test/index_test.js"
   },
   "keywords": [
     "virtual-dom",

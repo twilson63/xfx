@@ -1,11 +1,10 @@
+var document = require("global/document")
 var createElement = require('virtual-dom/create-element')
 var diff = require('virtual-dom/diff')
 var patch = require('virtual-dom/patch')
 
 var Delegator = require('dom-delegator')
 var reduce = require('reduce')
-
-var pin = require('linchpin')
 
 module.exports = app
 
@@ -55,8 +54,10 @@ function update(state) {
 
   var newTree = render(state)
   var patches = diff(tree, newTree)
+
   rootNode = patch(rootNode, patches)
   tree = newTree
 
   return rootNode
+
 }

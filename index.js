@@ -7,6 +7,12 @@ var Delegator = require('dom-delegator')
 var reduce = require('reduce')
 
 module.exports = app
+app.send = require('value-event/event')
+app.sendValue = require('value-event/value')
+app.sendChange = require('value-event/change')
+app.sendClick = require('value-event/click')
+app.sendSubmit = require('value-event/submit')
+app.sendKey = require('value-event/key')
 
 var render = null
 

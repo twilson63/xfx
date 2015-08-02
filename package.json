@@ -1,6 +1,6 @@
 {
   "name": "xfx",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple abstraction over virtual-dom",
   "main": "index.js",
   "scripts": {

@@ -1,13 +1,21 @@
 var app = require('../')
-var h = require('../h')
 
 main.render = render
-app(main)
 
-function main (state, update) {
-  return state
+// components
+var foo = require('./foo')
+
+function main () {
+  return {
+    component1: foo()
+  }
 }
 
 function render (state) {
-  return h('h1', 'hello world')
+  return app.h('div', [
+    app.h('h1', 'hello world'),
+    foo.render(state.component1)
+  ])
 }
+
+app(main)

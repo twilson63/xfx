@@ -20,32 +20,43 @@ This structure makes it very easy to create tree like structures of these compos
 ### main.js component
 
 ``` js
-var h = require('xfx/h') // virtual hyperscript
-var xtend = require('xtend')
+var app = require('xfx') 
+var h = app.h // virtual hyperscript
+var bindState = app.bindState
+
 
 module.exports = component
-component.render = render
-component.actions = actions
 
-function component (state, update) {
-  // do init stuff
+component.render = render
+
+
+function component () {
+  // define my state
+  var state = {
+    foo: 'baz'
+  }
 
   // initialize actions
-  xtend(state.actions, actions(update))
-
+  state.actions = bindState(actions())
   return state
 }
 
-function actions (update) {
-  foo: function (state) {
-    alert('Ping!')
+function actions () {
+  return {
+    foo: function (state) {
+      state.foo = 'bar'
+      // repaint
+      app.update()
+    }
   }
 }
 
 function render (state) {
   return h('div', [
     h('h1', 'Hello World'),
-    h('button', { 'ev-click': sendClick(state.actions.foo) }, 'FooBar')
+    h('button', { 
+      'ev-click': sendClick(state.actions.foo) 
+    }, state.foo)
   ])
 }
 ```
@@ -59,7 +70,7 @@ var app = require('xfx')
 // always start with root component
 var main = require('./components/main')
 // run app
-app(main, main.render)
+app(main)
 ```
 
 ## API

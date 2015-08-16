@@ -1,12 +1,13 @@
-var app = require('xfx')
-var h = require('xfx/h')
+var app = require('../')
+var h = app.h
 
 main.render = render
 app(main)
 
-function main (state, update) {
-  state.title = 'Hello World'
-  state.actions = app.xtend(state.actions, actions(update))
+function main () {
+  state = { title: 'Hello World' }
+  state.actions = app.bindState(actions(), state)
+
   return state
 }
 
@@ -25,14 +26,14 @@ function render (state) {
   ])
 }
 
-function actions (update) {
+function actions () {
   return {
     handleClick: function (state) {
       alert('click')
     },
     handleChange: function (state, data) {
       state.title = data.greeting
-      update(state)
+      app.update()
     }
   }
 }

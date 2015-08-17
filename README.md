@@ -20,15 +20,13 @@ This structure makes it very easy to create tree like structures of these compos
 ### main.js component
 
 ``` js
-var app = require('xfx') 
+var app = require('xfx')
 var h = app.h // virtual hyperscript
 var bindState = app.bindState
 
 
 module.exports = component
-
 component.render = render
-
 
 function component () {
   // define my state
@@ -54,8 +52,8 @@ function actions () {
 function render (state) {
   return h('div', [
     h('h1', 'Hello World'),
-    h('button', { 
-      'ev-click': sendClick(state.actions.foo) 
+    h('button', {
+      'ev-click': sendClick(state.actions.foo)
     }, state.foo)
   ])
 }
@@ -99,18 +97,121 @@ function render (state) {
 
 The `h` method is an alias to `virtual-hyperscript`
 
-### app.xtend
+`virtual-hyperscript` is a simple javascript module that create `VTree` notation for the virtual dom engine, it is a very expressive api
+to create markup, it also is very functional friendly.
 
-The `xtend` method is an alias to the xtend library, the method is included as
-a convience feature to extend the actions attribute of your state object. This attribute is used to associate handlers with domEvents.
+``` js
+function li (widget) {
+  return h('li', widget.name)
+})
 
-### app.send, app.sendValue, app.sendChange, app.sendClick, app.sendSubmit
+return h('ul', widgets.map(li))
+```
+
+``` html
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+</ul>
+```
+
+### app.update
+
+The app.update command should be called when the state changes within the component actions or within the component initialization method. The update method will take the current state and apply it to the DOM calling the render method.
+
+``` js
+function actions () {
+  return {
+    click: function (state) {
+      state.title = 'foo'
+      app.update()
+    }
+  }
+}
+```
+
+### app.bindState
+
+bindState is a helper method that can be used to bind actions from your component to handle the components state when a click, or submit occurs.
+
+
+``` js
+function component () {
+  var state = {}
+  state.actions = bindState(actions())
+  return state
+}
+
+function actions () {
+  return {
+    click: function (state) {
+      // do stuff
+    }
+  }
+}
+```
+
+---
 
 These are `value-event` handlers that manage the event listen and removing for you so you don't have to worry about boilier plate code and the need to add and remove listeners.
 
 
+### app.send
+
+The `send` method is the generic event method, if you want to capture all of the events of a given component, then you can use the send method to `ev-event` object.
+
+``` js
+  h('div', { 'ev-event': send(fn) } )
+```
 
 
+### app.sendValue
+
+The `sendValue` will send the value of an input element whenever the listener fires but it does not have special semantics of what's a valid event.
+
+https://github.com/Raynos/value-event#example-value
+
+
+### app.sendChange
+
+The `sendChange` event happens when form elements change.
+
+see: https://github.com/Raynos/value-event#example-change
+
+
+### app.sendClick
+
+The `sendClick` event fires whenever a click occurs on an element.
+
+https://github.com/Raynos/value-event#example-event
+
+### app.sendSubmit
+
+The `sendSubmit` fires when a form is submitted.
+
+https://github.com/Raynos/value-event#example-submit
+
+### app.sendKey
+
+The `sendKey` enables you to specify a key to listen for and then the event fires when that key is pressed.
+
+``` js
+  var UP = 38
+  var DOWN = 40
+  var ENTER = 13
+
+  h('input', {
+    'ev-keydown': [
+      sendKey(state.actions.move, 'down', { key: DOWN}),
+      sendKey(state.actions.move, 'up', { key: UP}),
+      sendKey(state.actions.select, 'select', { key: ENTER })
+      ]
+  })
+```
+
+### app.delegator
+
+The `delegator` helper is great for adding global event listeners.
 
 ## Examples
 

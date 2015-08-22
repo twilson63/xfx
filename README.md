@@ -73,7 +73,7 @@ app(main)
 
 ## API
 
-### app [default function]
+### app([default init function with render function], [optional target])
 
 This function takes in the main or root component, this component should have a default handler that receives the state and update objects and returns a state object.
 

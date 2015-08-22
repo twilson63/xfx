@@ -25,9 +25,9 @@ app.sendKey = require('value-event/key')
 app.xtend = require('xtend')
 // bind state to actions
 app.bindState = bindState
-// init delegator 
+// init delegator
 app.delegator = Delegator()
-// update 
+// update
 app.update = update
 
 var render = null
@@ -50,7 +50,8 @@ function bindState (actions, state) {
 }
 
 
-function app (main) {
+function app (main, target) {
+  if (!target) target = document.body
   // main must be a function
   if (typeof main !== 'function')
     throw new Error('main must be a function')
@@ -63,8 +64,7 @@ function app (main) {
 
   state = main()
   // attach to body
-  document.body
-    .appendChild(update())
+  target.appendChild(update())
 
 }
 

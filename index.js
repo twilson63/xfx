@@ -65,7 +65,8 @@ function app (main, target) {
   state = main()
   // attach to body
   target.appendChild(update())
-
+  // return state
+  return state
 }
 
 var tree = {}
